@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Login & Dashboard</title>
+
+    <!-- EMBEDDED CSS -->
+    <style>
+        body {
+            background: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .box {
+            margin: 100px auto;
+            width: 300px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        input {
+            display: block;
+            width: 90%;
+            padding: 10px;
+            margin: 10px auto;
+        }
+
+        button {
+            width: 95%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .logout {
+            background: #ff4444;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="box">
+        <h2>Student Login</h2>
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="login()">Login</button>
+        <p id="error"></p>
+    </div>
+
+    <!-- DASHBOARD PAGE (hidden at first) -->
+    <div id="dashboard" class="box" style="display: none;">
+        <h1>Welcome, Student</h1>
+
+        <button onclick="watchVideo()">📺 Watch Videos</button>
+        <button onclick="startTest()">📝 Start Practical Test</button>
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- EMBEDDED JAVASCRIPT -->
+    <script>
+        // Login Function
+        function login() {
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+
+            // Demo login
+            if (user === "student" && pass === "12345") {
+                localStorage.setItem("loggedIn", "yes");
+                showDashboard();
+            } else {
+                document.getElementById("error").innerHTML = "Invalid login details!";
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+        }
+
+        // Alerts for buttons
+        function watchVideo() {
+            alert("This will open video lessons (we will build it next).");
+        }
+
+        function startTest() {
+            alert("This will start the practical test (we will build it next).");
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            location.reload();
+        }
+
+        // Auto-login if already authenticated
+        if (localStorage.getItem("loggedIn") === "yes") {
+            showDashboard();
+        }
+    </script>
+
+</body>
+</html>
